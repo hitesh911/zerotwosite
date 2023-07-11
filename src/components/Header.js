@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "../styles/Header.css";
 import MyButton from "./MyButton";
+import Cookies from 'universal-cookie';
+import { NotificationManager } from "react-notifications";
 
 function Header() {
+  const cookie = new Cookies();
   const [isMobile, setIsMobile] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
@@ -32,7 +35,12 @@ function Header() {
       mediaQuery.removeEventListener("change", handleMediaQueryChange);
     };
   }, []);
-
+  const logout =()=>{
+    cookie.remove('userCred',{ path: '/' });
+    cookie.remove('ids',{ path: '/' });
+    NotificationManager.success("Loged out","Successfully",5000);
+    window.location.href = "/"
+  }
   return (
     <header id="header">
       <div className="w-100 min-w-small flex justify-content-between align-center">
@@ -49,6 +57,21 @@ function Header() {
         {isMobile ? (
           <>
             {/* download btn  */}
+            {cookie.get("userCred")?(
+              <MyButton className="signup-btn"
+              text="Logout"
+              background="transparent"
+              boxShadow="none"
+              margin="0 1.5rem 0 auto"
+              textDecoration="none"
+              fontWeight="var(--fw-bolder)"
+              fontSize="1.2rem"
+              color="var(--clr-primary-100)"
+              fontFamily="var(--ff-body)"
+              onClick={logout}
+            />  
+            ):(
+              <>
             <MyButton className="signup-btn"
               text="SignUp"
               background="transparent"
@@ -61,6 +84,8 @@ function Header() {
               fontFamily="var(--ff-body)"
               href="/signup"
             />
+              </>
+            )}
             {/* hamburger btn  */}
             <button className="hamburger-icon" onClick={handleMenuToggle}>
               <span className={`line ${isMenuOpen ? "line-open" : ""}`}></span>
@@ -117,7 +142,7 @@ function Header() {
                       Search
                     </Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link
                       to="/blogs"
                       className={
@@ -127,7 +152,7 @@ function Header() {
                     >
                       Blogs
                     </Link>
-                  </li>
+                  </li> */}
                   <li>
                     <Link
                       to="/about"
@@ -193,14 +218,14 @@ function Header() {
                     Search
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link
                     to="/blogs"
                     className={location.pathname === "/blogs" ? "active" : ""}
                   >
                     blogs
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <Link
                     to="/about"
@@ -227,7 +252,11 @@ function Header() {
                 </li>
               </ul>
             </nav>
-            <MyButton text="SignUp" href="/signup"/>
+            {cookie.get("userCred")?(
+              <MyButton text="Logout" onClick={logout}/>
+              ):(
+                <MyButton text="SignUp" href="/signup"/>
+            )}
           </>
         )}
       </div>

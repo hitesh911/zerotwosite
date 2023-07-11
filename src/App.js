@@ -11,6 +11,7 @@ import SearchPage from './pages/SearchPage';
 import BlogsPage from './pages/BlogsPage';
 import ContactUsPage from './pages/ContactUsPage';
 import SignUpPage from './pages/SignUpPage';
+import LoginPage from './pages/LoginPage';
 import DownloadPage from './pages/DownloadPage'
 import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
@@ -45,6 +46,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactUsPage />} />
           <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/disclaimer" element={<Disclaimer />} />

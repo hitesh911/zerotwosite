@@ -6,24 +6,27 @@ import { handleCopy } from "./DownloadPage";
 import ReCAPTCHA from 'react-google-recaptcha';
 import {NotificationManager}  from "react-notifications"
 import ReactLoading from 'react-loading';
+import { filesize } from "filesize";
 function UploadFile() {
   const [uploadedFile, setUploadedFile] = useState(null);
   const [uploadedUrl, setUploadedUrl] = useState(null);
   const [uploadStarted, setUploadStarted] = useState(false);
-  // const [uploadProgress,setUploadProgress] = useState(null);
+  const [uploadProgress,setUploadProgress] = useState(null);
   const captchaRef = useRef(null)
   
-  // const handleUploadProgress = (event) => {
-    // if (event.lengthComputable) {
-    //   console.log("hello",event.loaded)
-    //   const progress = Math.round((event.loaded / event.total) * 100);
-    //   setUploadProgress(progress);
-    // }
-    // this is temp loading till progress bar under construction 
+  const handleUploadProgress = (event) => {
+    if (event.lengthComputable && event.loaded !== event.total) {
+      const progress = Math.round((event.loaded / event.total) * 100);
+      setUploadProgress(progress);
+    }else{
+      //
+    }
 
-  // };
+  };
 
   const handleUploadComplete = (event) => {
+    // resetting states 
+    setUploadStarted(false)
     if (event.target.readyState === 4) {
       if (event.target.status === 200) {
         const data = JSON.parse(event.target.responseText);
@@ -40,8 +43,6 @@ function UploadFile() {
     }
   };
   const uploadToServer = () =>{
-    setUploadStarted(true)
-    NotificationManager.info("It will be added soon","Progress can't be shown",10000)
     const token = captchaRef.current.getValue();
     if (!uploadedFile) {
       NotificationManager.error('File not selected',"Error", 5000);
@@ -55,7 +56,10 @@ function UploadFile() {
     formData.append("file", uploadedFile);
     const xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
-    // xhr.upload.addEventListener("progress", handleUploadProgress);
+    // this is temp loading till progress bar under construction 
+    setUploadStarted(true)
+    NotificationManager.info("Progress may not be shown","Warning",10000)
+    xhr.upload.addEventListener("progress", handleUploadProgress);
     xhr.onreadystatechange = handleUploadComplete;
     xhr.send(formData);
     // fetch(url, {
@@ -102,17 +106,22 @@ function UploadFile() {
         <h2>Upload</h2>
         <span className="material-symbols-outlined">upload</span>
         {uploadedFile ? (
-          <div className="flex flex-col">
+          <div className="flex flex-col align-center justify-content-center">
             <p>Uploaded file: {uploadedFile.name}</p>
-            <p>File size: {(uploadedFile.size)/1024/1024} MB</p>
+            <p>File size: {filesize(uploadedFile.size)}</p>
             {uploadedUrl ?(
               <MyButton text={"copy"} icon={"share"}  onClick={()=>handleCopy(uploadedUrl)}/>
               ):(
                 <>
                 {uploadStarted ?(
+
                   <div className="text-center">
                       <ReactLoading className="uploading-loading" type="cubes" color="var(--clr-primary-100)" height={32}/>
+                      {uploadProgress?(
+                        <h4 className="mt-50">{uploadProgress}% Uploaded</h4>  
+                      ):(
                       <h4 className="mt-50">Uploading, Please wait..</h4>
+                      )}
                   </div>
                 ):(
                   <>

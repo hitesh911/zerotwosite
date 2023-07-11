@@ -1,7 +1,7 @@
 {
     "homePage": {
         "SectionWithImageFirst": {
-            "imageSrc":null,
+            "imageSrc":"heroImage.jpg",
             "imageAlt":null,
             "headingInBlack": "Upload your memories and share with your",
             "headingInBlue":"Friends & Families",
@@ -14,8 +14,8 @@
                 "redirection" : "/upload"
             },
             "button2": {
-                "text": "Download now",
-                "redirection" : "/download"
+                "text": "Search Content",
+                "redirection" : "/search"
             },
             "imageOnLeft":false
             

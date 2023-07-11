@@ -63,13 +63,13 @@ function Footer() {
                       Community
                     </Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link
                       to="/blogs"
                     >
                       Blog
                     </Link>
-                  </li>
+                  </li> */}
                   <li>
                     <Link
                       to="/contact"

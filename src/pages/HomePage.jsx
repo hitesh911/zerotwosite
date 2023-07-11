@@ -1,6 +1,9 @@
 import React from "react";
 import SectionWithImage from "../components/SectionWithImage";
 import content from "../assets/content/home.json"
+import Cookies from 'universal-cookie';
+import { useState } from "react";
+import "../styles/HomePage.css"
 
  /*---------------------data generator functions for resuable componenets-------------------- 
  Note: all generator functions starts with get */
@@ -46,11 +49,46 @@ function getSectionWithImageFirst(){
 // }
 // ---------------------main home componenet ------------------------
 function HomePage() {
+  const cookies = new Cookies(); 
+  const [userCred] = useState(cookies.get("userCred"));
+  const [ids] = useState(cookies.get("ids"));
+  const[userData,setUserData] = useState(null);
+    function auth(){
+      fetch(`https://api.zerotwo.in/auth/${userCred.username}/${userCred.password}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        "id": ids.id,
+        "device":ids.device
+
+      },
+    })
+      .then((response) => {
+          return response.json();
+      })
+      .then((data) => {
+          setUserData(data);
+      })
+      .catch((error) => {
+        // Handle any errors
+      });}
+    // if user loged in then fetch his data 
+    if(userCred && ids){
+      auth()
+    }else{
+          //nothing
+    }
+  // )
   // generating data for reusable components 
   const FirstSecImgData =  getSectionWithImageFirst()
   return (
     <div className="home-div">
-      <section className="pt-5 pb-5">
+      {userCred && (
+        <>
+          <h1 className="user-name | text-center " >Welcome : {userCred.username.split("@")[0]}</h1>
+        </>
+      )}
+      <section className="pt-2 pb-5">
       <SectionWithImage
         imageSrc={FirstSecImgData.imageSrc}
         imageAlt={FirstSecImgData.imageAlt}

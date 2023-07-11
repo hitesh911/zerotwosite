@@ -77,10 +77,10 @@ function DownloadPage() {
       fetch(apiUrl, { headers })
         .then(response => response.json())
         .then(data => {
-            data.status? setData(data.data):console.log("invalid link");
+            data.status? setData(data.data):NotificationManager.error("Link has been expired","Error",5000);
         })
         .catch(error => {
-          console.error('Error making api request:', error);
+          NotificationManager.error("Unable to communicate with server","Error",5000)
         });
     }, [id, fileid, filename]);
     return (

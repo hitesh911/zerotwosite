@@ -59,7 +59,7 @@
 .download-container small{
     font-size: var(--fs-100);
 }
-.input-wrap > span{
+.input-wrap  span{
     color: white;
   }
   .download-btns {
@@ -67,20 +67,42 @@
     justify-content: space-between;
     flex-direction: column;
     row-gap: 1rem;
+
+}
+  .download-btns-search {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    row-gap: 1rem;
+    align-items: center;
+
 }
 .download-btns >div {
   display: flex;
   justify-content: center;
 }
-.download-btns  a ,.download-btns  button{
+.download-btns  a, .download-btns  button {
   margin: 1rem 0;
   display: flex;
   column-gap: .5rem;
   align-items: center;
+
+}
+.download-btns-search  a, .download-btns-search  button {
+  margin: 1rem 0;
+  display: flex;
+  column-gap: .5rem;
+  align-items: center;
+  max-width: 20rem;
+  min-width: 20rem;
+
 }
   @media (max-width: 768px) {
     .input-wrap {
       width: 96%;
+    }
+    .download-btns-search  a, .download-btns-search  button {
+      width: 100% !important;
     }
   }
   
