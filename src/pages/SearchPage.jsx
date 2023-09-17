@@ -87,7 +87,9 @@ function SearchPage() {
           ))}
         </ul>
       ) : (
-        <DownloadContainer name="No Content" size="not availabe" link="/"/>  
+      <div className="text-center">
+        <h1>Try searching with proper spell check!</h1>
+      </div>
       )}
 
       <Disclaimer />

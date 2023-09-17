@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SectionWithImage from "../components/SectionWithImage";
 import content from "../assets/content/home.json"
 import Cookies from 'universal-cookie';
 import { useState } from "react";
 import "../styles/HomePage.css"
-
+import ReactGA from "react-ga4";
  /*---------------------data generator functions for resuable componenets-------------------- 
  Note: all generator functions starts with get */
 
@@ -49,6 +49,9 @@ function getSectionWithImageFirst(){
 // }
 // ---------------------main home componenet ------------------------
 function HomePage() {
+  useEffect(()=>{
+    ReactGA.send({page:window.location.href,title:"Home page"});
+  },[])
   const cookies = new Cookies(); 
   const [userCred] = useState(cookies.get("userCred"));
   const [ids] = useState(cookies.get("ids"));

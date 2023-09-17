@@ -80,10 +80,15 @@ function SignUpPage() {
         'Content-Type': 'application/json',
         "otp":e.target.otp.value,
         "session":config.session,
-
       },
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if(response.status !== 200){
+          NotificationManager.error("Invailed Otp or something went wrong","Error",5000)
+        }else{
+          return response.json()
+        }
+      })
       .then((data) => {
         console.log(data);
         if(data.status){

@@ -318,7 +318,7 @@ select {
   display: flex;
   margin: 1rem 0;
   cursor: pointer;
-  border-radius: 0.8rem;
+  border-radius: 0.5rem;
   padding: calc(var(--size-100) / 2) var(--size-100);
   border: 0;
   font-weight: var(--fw-medium-bold);

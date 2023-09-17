@@ -17,10 +17,14 @@ import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
 import Disclaimer from './pages/Disclaimer';
 import {NotificationContainer} from 'react-notifications';
+import ReactGA from "react-ga4";
 // -------import styles ------
 import "./styles/Global.css"
 // external libs css 
 import 'react-notifications/lib/notifications.css';
+
+
+ReactGA.initialize("G-LHW3MYM0FD");
 
 const ScrollToTop = ({ children }) => {
   const { pathname } = useLocation();
