@@ -2,6 +2,19 @@
 
 Welcome to ZeroTwo, a content uploading and sharing platform designed to provide users with a seamless experience for sharing various types of content. Whether it's photos, videos, documents, or any other file format, ZeroTwo allows users to upload and share their content publicly or privately with ease.
 
+## Screenshots
+
+1. ![Screenshot 1](public/1.png)
+---
+2. ![Screenshot 2](public/2.png)
+---
+3. ![Screenshot 3](public/3.png)
+---
+4. ![Screenshot 4](public/4.png)
+---
+5. ![Screenshot 5](public/5.png)
+
+   
 ## Introduction
 
 ZeroTwo aims to provide users with the best service without any charges. Users can upload or download any size, format, or kind of content without limitations. Memories are precious, and there should be no restrictions on storing them. With ZeroTwo, users can preserve their memories and share them with others effortlessly.
