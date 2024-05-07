@@ -12,7 +12,11 @@ Welcome to ZeroTwo, a content uploading and sharing platform designed to provide
 ---
 4. ![Screenshot 4](public/4.png)
 ---
-5. ![Screenshot 5](public/5.png)
+5. ![Screenshot 5](public/5.png) 
+---
+6. ![Screenshot 6](public/6.png)
+---
+7. ![Screenshot 7](public/7.png)
 
    
 ## Introduction
